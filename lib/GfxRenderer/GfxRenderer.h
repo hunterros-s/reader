@@ -98,7 +98,12 @@ class GfxRenderer {
                              uint8_t styleMask = 0x0F) const;
 
   // Orientation control (affects logical width/height and coordinate transforms)
-  void setOrientation(const Orientation o) { orientation = o; }
+  void setOrientation(const Orientation o) {
+    orientation = o;
+#ifdef SIMULATOR
+    display.setSimulatorOrientation(static_cast<int>(o));
+#endif
+  }
   Orientation getOrientation() const { return orientation; }
 
   // Fading fix control
